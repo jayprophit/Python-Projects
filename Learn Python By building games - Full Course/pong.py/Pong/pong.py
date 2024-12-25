@@ -6,6 +6,10 @@ Pong
 '''
 # import tutrle function
 import turtle
+import os
+'''
+import winsound # microsoft windows sound import
+'''
 
 
 
@@ -149,16 +153,28 @@ while True:
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
+
     # Border checking
     # top border
     if ball.ycor() > 290:
         ball.set(290)
         ball.dy *= -1
+        # mac operating systems, & stops the delay
+        os.system("afplay bounce.wav&")
+        
+        '''
+        # linux operating systems
+        os.system("aplay bounce.wav&")
+
+        winsound.PlaySound("bounce.wav", winsound.SND_ASYNC)
+        '''
 
     # bottom border
     if ball.ycor() < -290:
         ball.set(-290)
         ball.dy *= -1
+        # mac operating systems, & stops the delay
+        os.system("afplay bounce.wav&")
 
     # right border
     if ball.xcor() > 390:
@@ -186,13 +202,18 @@ while True:
         # writes the score on the screen
         pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("courier", 24, "normal"))
 
+
     # Paddle and Ball collisions
     # right paddle and ball
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() -40):
         ball.setx(340)
         ball.dx *= -1
+        # mac operating systems, & stops the delay
+        os.system("afplay bounce.wav&")
 
     # left paddle and ball
     if (ball.xcor() > -340 and ball.xcor() < -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() -40):
-            ball.setx(-340)
-            ball.dx *= -1
+        ball.setx(-340)
+        ball.dx *= -1
+        # mac operating systems, & stops the delay
+        os.system("afplay bounce.wav&")
