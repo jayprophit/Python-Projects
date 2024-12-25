@@ -2,6 +2,8 @@
 
 ## freeCodeCamp
 
+[youtube video](https://youtu.be/XGf2GcyHPhc?si=DwGBDk-fAVaIk2nB)
+
 - Pong
 - Snake
 - Connect Four
