@@ -8,7 +8,8 @@ Pong
 import turtle
 import os
 '''
-import winsound # microsoft windows sound import
+# microsoft windows sound import
+import winsound
 '''
 
 
@@ -29,6 +30,7 @@ win.tracer(0)
 # Score
 score_a = 0
 score_b = 0
+
 
 # Paddle A - Left
 # name of Object 1
@@ -99,6 +101,7 @@ pen.goto(0, 260)
 pen.write("Player A: 0  Player B: 0", align="center", font=("courier", 24, "normal"))
 
 
+
 # Function
 # paddle A up
 def paddle_a_up():
@@ -148,6 +151,7 @@ win.onkeypress(paddle_b_down, "DOWN")
 while True:
     # every time the loop runs, it updates the screen
     win.date()
+
 
     # Move the ball
     ball.setx(ball.xcor() + ball.dx)
