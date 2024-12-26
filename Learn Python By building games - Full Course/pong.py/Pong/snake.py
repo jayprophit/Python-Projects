@@ -1,3 +1,6 @@
+# snake
+# by @jayprophit
+
 '''
 snake in pygame
 '''
