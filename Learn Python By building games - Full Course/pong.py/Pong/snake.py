@@ -18,16 +18,19 @@ class cube(object):
     row = 20
     w = 500
     
+    
     def __init__(self, start, dirnx=1, dirny=o, color=(255, 0, 0)):
         self.pos = start
         self.dirnx = 1
         self.dirny = 0
         self.color = color
 
+
     def move(self, dirnx, dirny):
         self.dirnx = dirnx
         self.dirny = dirny
         self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
+
 
     def draw(self, surface, eyes=False):
         dis = self.w // self.rows
@@ -49,12 +52,14 @@ class snake(object):
     body = []
     turns = {}
 
+
     def __init__(self, color, pos):
         self.color = color
         self.head = cube(pos)
         self.body.append(self.head)
         self.dirnx = 0
         self.dirny = 1
+
 
     def move(self):
         for event in pygame.event.get():
@@ -100,7 +105,6 @@ class snake(object):
                 else: c.move(c.dirnx, c.dirny)
 
 
-
     def reset(self, pos):
         self.head = cube(pos)
         self.body = []
@@ -108,7 +112,6 @@ class snake(object):
         self.turns = {}
         self.dirnx = 0
         self.dirny = 1
-
 
 
     def addCube(self):
@@ -219,15 +222,3 @@ def main():
         redrawWindow(win)
 
     pass
-
-
-'''
-rows =
-w =
-h =
-
-cube.rows = rows
-cube.w = w
-
-main()
-'''
