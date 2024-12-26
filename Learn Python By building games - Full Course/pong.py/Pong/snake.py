@@ -23,11 +23,34 @@ class cube(object):
 
 
 class snake(object):
+    body = []
+    turns = {}
+
     def __init__(self, color, pos):
-        pass
+        self.color = color
+        self.head = cube(pos)
+        self.body.append(self.head)
+        self.dirnx = 0
+        self.dirny = 1
 
     def move(self):
-        pass
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            keys = pygame.key.get_pressed()
+
+            for key in keys:
+                if keys[pygame.K_LEFT]
+                    self.dirnx = -1
+                    self.dirny = 0
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                if keys[pygame.K_RIGHT]
+
+                if keys[pygame.K_UP]
+
+                if keys[pygame.K_DOWN]
 
     def reset(self, pos):
         pass
@@ -52,14 +75,20 @@ def drawGrid(w, rows, surface):
         pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, w))
         pygame.draw.line(surface, (255, 255, 255), (0, y), (w, y))
 
+
+
 def redrawWindow(surface):
     global rows, width
     surface.fill((0, 0, 0))
     drawGrid(width, rows, surface)
     pygame.display.update()
 
+
+
 def randomSnack(rows, items):
     pass
+
+
 
 def message_box(subject, content):
     pass
