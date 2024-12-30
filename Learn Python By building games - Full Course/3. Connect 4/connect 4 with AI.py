@@ -217,7 +217,6 @@ while not game_over:
             if turn == PLAYER:
                 posx = event.pos[0]
                 col = int(math.floor(posx/SQUARESIZE))
-                '''int(input("Player 1 make your Selection (0-6):"))'''
 
 
                 # checks if its a valid location on the board
@@ -229,7 +228,6 @@ while not game_over:
                     # checks for winning move
                     if winning_move(board, PLAYER_PIECE):
                         label = myfont.render("Player 1 Wins!!", 1, RED)
-                        '''print("Player 1 Wins!!! Congrats!!!")'''
                         # updates that specific part of the screen 
                         screen.blit(label, (40, 10))
                         game_over = True
@@ -265,11 +263,9 @@ while not game_over:
             # checks for winning move
             if winning_move(board, AI_PIECE):
                 label = myfont.render("Player 2 Wins!!", 1, YELLOW)
-                '''print("Player 2 Wins!!! Congrats!!!")'''
                 # updates that specific part of the screen 
                 screen.blit(label, (40, 10))
                 game_over = True
-                #break
 
 
 
