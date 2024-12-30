@@ -13,7 +13,7 @@ col = column
 
 # imports numpy package, set numpy to be defined as np
 import numpy as np
-
+import pygame
 
 
 # global
@@ -96,6 +96,20 @@ game_over = False
 
 #defines turn amount
 turn = 0
+
+
+
+# initialize pygame
+pygame.init()
+
+SQUARESIZE = 100
+
+width = COLUMN_COUNT * SQUARESIZE
+height = (ROW_COUNT+1) * SQUARESIZE
+
+size = (width, height)
+
+screen = pygame.display.set_mode(size)
 
 
 

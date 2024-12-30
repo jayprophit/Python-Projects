@@ -11,6 +11,8 @@
 - Connect Four, part 1 - keith Galli
 - Connect four with AI, part 2 - Keith Galli [Connect four with AI](https://youtu.be/MMLtza3CZFM?si=zrsqayr4mAVcWrYM)
 
+[pygame documentation](pygame.org/docs/)
+
 - Tetris
 
 - Online multiplayer Game
