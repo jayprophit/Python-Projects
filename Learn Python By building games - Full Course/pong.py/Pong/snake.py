@@ -13,31 +13,35 @@ import tkinter as Tk
 from tkinter import messagebox
 
 
-
+# this draws thew cube object on the screen which the snake is made from cubes
 class cube(object):
     row = 20
     w = 500
     
     
+    # this is draws the cube object
     def __init__(self, start, dirnx=1, dirny=o, color=(255, 0, 0)):
         self.pos = start
         self.dirnx = 1
         self.dirny = 0
         self.color = color
 
-
+    
+    # this makes sure the cube object stays with the snake
     def move(self, dirnx, dirny):
         self.dirnx = dirnx
         self.dirny = dirny
         self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
 
-
+    # this draws the head of the snake
     def draw(self, surface, eyes=False):
         dis = self.w // self.rows
         i = self.pos[0]
         j = self.pos[1]
 
+        # this lets you see the grid with rectangles
         pygame.draw.rect(surface, self.color, (i*dis+1, j*dis+1, dis-2, dis-2))
+        # this draws the eyes on the snake
         if eyes:
             centre = dis//2
             radius = 3
@@ -47,7 +51,7 @@ class cube(object):
             pygame.draw.circle(surface, (0, 0, 0), circleMiddle2, radius)
 
 
-
+# this is your snake
 class snake(object):
     body = []
     turns = {}
@@ -60,7 +64,7 @@ class snake(object):
         self.dirnx = 0
         self.dirny = 1
 
-
+    # this is the snakes movement
     def move(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -89,6 +93,7 @@ class snake(object):
                     self.dirny = 1
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
+        # this looks(tracks), moves the positions of the snake
         for i, c in emerate(self.body):
             p = c.pos[:]
             if p in self.turns:
@@ -97,6 +102,7 @@ class snake(object):
                 if i == len(self.body)-1:
                     self.turns.pop(p)
 
+            # this checks to see if we have reached the edge of the screen
             else:
                 if c.dirnx == -1 and c.pos[0] <= 0: c.pos = (c.rows-1, c.pos[1])
                 elif c.dirnx == 1 and c.pos[0] >= c.rows-1: c.pos = (0, c.pos[1])
@@ -104,7 +110,7 @@ class snake(object):
                 elif c.dirnx == -1 and c.pos[1] <= 0: c.pos = (c.pos[0], c.rows-1)
                 else: c.move(c.dirnx, c.dirny)
 
-
+    # this resets the cube object which is a snake
     def reset(self, pos):
         self.head = cube(pos)
         self.body = []
@@ -113,7 +119,7 @@ class snake(object):
         self.dirnx = 0
         self.dirny = 1
 
-
+    # this adds a cubes to the screen
     def addCube(self):
         tail = self.body[-1]
         dx, dy = tail.dirnx, tail.dirny
@@ -130,7 +136,7 @@ class snake(object):
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy
 
-
+    # this draws eyes on the snake for head direction
     def draw(self, surface):
         for i, c in enumerate(self.body):
             if i == 0:
@@ -139,7 +145,7 @@ class snake(object):
                 c.draw(surface)
 
 
-
+# this draws the grid
 def drawGrid(w, rows, surface):
     sizeBtwn = // rows
 
@@ -153,7 +159,7 @@ def drawGrid(w, rows, surface):
         pygame.draw.line(surface, (255, 255, 255), (0, y), (w, y))
 
 
-
+# this updates the display
 def redrawWindow(surface):
     global rows, width, s, snack
     surface.fill((0, 0, 0))
@@ -163,7 +169,7 @@ def redrawWindow(surface):
     pygame.display.update()
 
 
-
+# this is a random item that the snake can eat
 def randomSnack(rows, items):
     positions = item.body
 
@@ -178,7 +184,7 @@ def randomSnack(rows, items):
     return (x,y)
 
 
-
+# this shows a message when you die
 def message_box(subject, content):
     root =tk.TK()
     root.attributes("-topmost", True)
@@ -190,7 +196,7 @@ def message_box(subject, content):
         pass
 
 
-
+# main settings and global control
 def main():
     global width, rows, s, sanck
     height = 500
