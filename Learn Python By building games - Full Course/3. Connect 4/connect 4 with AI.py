@@ -13,6 +13,7 @@ col = column
 '''these are importated packages with functions'''
 # imports numpy package, set numpy to be defined as np
 import numpy as np
+import random
 import pygame
 import sys
 import math
@@ -30,6 +31,13 @@ ROW_COUNT = 6
 COLUMN_COUNT =7
 
 
+PLAYER = 0
+AI = 1
+
+PLAYER_PIECE = 1
+AI_PIECE = 2
+
+WINDOW_LENGTH = 4
 
 '''defines board specifications'''
 # defines the board specifications
@@ -101,7 +109,18 @@ def winning_move(board, piece):
 
 
 
-'''draws graphics with pygame package'''
+'''defines a score'''
+# defines the score position
+def score_position(board, piece):
+    ## Score horizontal
+    for r in range(ROW_COUNT):
+        row_array = [int(i) for i in list(board[r,:])]
+        for c in range(COLUMN_COUNT-3):
+            window = row_array[c:c+WINDOW_LENGTH]
+
+
+
+    '''draws graphics with pygame package'''
 # draw board with pygame graphics
 def draw_board(board):
     for c in range(COLUMN_COUNT):
@@ -114,10 +133,10 @@ def draw_board(board):
 
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT):
-            if board[r][c] == 1:
+            if board[r][c] == PLAYER_PIECE:
                 # draws red circles
                 pygame.draw.circle(screen, RED, (int(c*SQUARESIZE+SQUARESIZE/2), height-int(r*SQUARESIZE+SQUARESIZE/2)), RADIUS)
-            elif board[r][c] == 2:
+            elif board[r][c] == AI_PIECE:
                 # draws yellow circles
                 pygame.draw.circle(screen, YELLOW, (int(c*SQUARESIZE+SQUARESIZE/2), height-int(r*SQUARESIZE+SQUARESIZE/2)), RADIUS)
     pygame.display.update()
@@ -134,10 +153,6 @@ print_boaard(board)
 '''defines if the game is still active or has reached a result'''
 # defines if the game is over on in play
 game_over = False
-
-'''defines how many turns are available'''
-#defines turn amount
-turn = 0
 
 
 
@@ -166,6 +181,12 @@ pygame.display.update()
 myfont = pygame.font.SysF("monospace", 75)
 
 
+
+'''defines how many turns are available'''
+turn = random.randint(PLAYER, AI)
+
+
+
 '''defines what happens, (whilst game is in loop) if the game has not reached a result'''
 # defines what happens if the game is not over 
 while not game_over:
@@ -181,70 +202,79 @@ while not game_over:
         if event.type == pygame.MOUSEMOTION:
             pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
             pos = event.pos[o]
-            if turn == o:
+            if turn == PLAYER:
                 pygame.draw.circle(screen, RED, (posx, int(SQUARESIZE/2)), RADIUS)
-            else:
-                pygame.draw.circle(screen, YELLOW, (posx, int(SQUARESIZE/2)), RADIUS)
+            
         pygame.display.update()
 
 
         # this allows the use of a mouse to be detected
         if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
             
-            posx = event.pos[0]
-            col = int(math.floor(posx/SQUARESIZE))
-            '''int(input("Player 1 make your Selection (0-6):"))'''
+            # print(event.pos)
+            # ask for player 1 input
+            if turn == PLAYER:
+                posx = event.pos[0]
+                col = int(math.floor(posx/SQUARESIZE))
+                '''int(input("Player 1 make your Selection (0-6):"))'''
 
 
-            # checks if its a valid location on the board
-            if is_valid_location(board, col):
-
-                pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
-
-                # print(event.pos)
-                # ask for player 1 input
-
-                if turn == 0:
+                # checks if its a valid location on the board
+                if is_valid_location(board, col):            
                     row = get_next_open_row(board, col)
-                    drop_piece(board, row, col, 1)
+                    drop_piece(board, row, col, PLAYER_PIECE)
 
 
                     # checks for winning move
-                    if winning_move(board, 1):
+                    if winning_move(board, PLAYER_PIECE):
                         label = myfont.render("Player 1 Wins!!", 1, RED)
                         '''print("Player 1 Wins!!! Congrats!!!")'''
                         # updates that specific part of the screen 
                         screen.blit(label, (40, 10))
                         game_over = True
 
-
-            # askfor player 2 input
-            else:
-                posx = event.pos[0]
-                col = int(math.floor(posx/SQUARESIZE)) 
-                '''int(input("Player 2 make your Selection (0-6):"))'''
+                    # increase turn by 1
+                    turn += 1
+                    # turns its to odd even, meaning take what ever our turn is and divides it by 2 (alternating between player 1 and 2)
+                    turn = turn % 2
 
 
-                # checks if its a valid location on the board
-                if is_valid_location(board, col):
-                    row = get_next_open_row(board, col)
-                    drop_piece(board, row, col, 2)
+                    # prints board
+                    print_board(board)
+                    # draw board
+                    draw_board(board)
 
 
-                    # checks for winning move
-                    if winning_move(board, 2):
-                        label = myfont.render("Player 2 Wins!!", 1, YELLOW)
-                        '''print("Player 2 Wins!!! Congrats!!!")'''
-                        # updates that specific part of the screen 
-                        screen.blit(label, (40, 10))
-                        game_over = True
-                        #break
+
+    # ask for player AI input
+    if turn == AI and not game_over:
+        
+        # selects a random data input
+        col = random.randint(0, COLUMN_COUNT-1)
+
+
+        # checks if its a valid location on the board
+        if is_valid_location(board, col):
+            # wait function - delay
+            pygame.time.wait(500)
+            row = get_next_open_row(board, col)
+            drop_piece(board, row, col, AI_PIECE)
+
+
+            # checks for winning move
+            if winning_move(board, AI_PIECE):
+                label = myfont.render("Player 2 Wins!!", 1, YELLOW)
+                '''print("Player 2 Wins!!! Congrats!!!")'''
+                # updates that specific part of the screen 
+                screen.blit(label, (40, 10))
+                game_over = True
+                #break
 
 
 
             # prints board
             print_board(board)
-
             # draw board
             draw_board(board)
 
@@ -253,6 +283,6 @@ while not game_over:
             # turns its to odd even, meaning take what ever our turn is and divides it by 2 (alternating between player 1 and 2)
             turn = turn % 2
 
-            # wait function
-            if game_over:
-                pygame.timer.wait(3000)
+    # wait function - delay
+    if game_over:
+        pygame.timer.wait(3000)
