@@ -120,7 +120,7 @@ def evaluate_window(window, piece):
     if piece = PLAYER_PIECE:
         opp_piece = AI
 
-    # counts used turns and pieces together to calculate score
+    # counts:- used turns and pieces together are calculate  to make the score
     if window.COUNT(piece) == 4:
         score == 100
     elif window.COUNT(piece) == 3 and window.COUNT(EMPTY) == 1:
