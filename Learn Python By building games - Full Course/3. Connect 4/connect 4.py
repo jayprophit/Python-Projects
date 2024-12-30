@@ -25,27 +25,27 @@ ROW_COUNT = 6
 COLUMN_COUNT =7
 
 
-
+'''defines board specifications'''
 # defines the board specifications
 def create_board(
     board = np.zeros((ROW_COUNT,COLUMN_COUNT))):
     return board
 
 
-
+''' drops players piece'''
 # drops the player 1 or player 2 piece in the correct row and column
 def drop_piece(board, row, col, piece):
     boared[row][col] = piece
 
 
-
+'''defines if the piece is in the correct location'''
 # defines if its the valid location
 def is_valid_location(board, col):
     # check to see if the 5th col is available without an input
     return board[ROW_COUNT-1][col] == 0
 
 
-
+'''looks for the next available space'''
 # gets the next open row
 def get_next_open_row(board, col):
     for r in range(ROW_COUNT):
@@ -54,13 +54,13 @@ def get_next_open_row(board, col):
             return r
 
 
-
+'''flip the orientation of th bord 180 degress'''
 # change the orientation of the board, flips board to right side up
 def print_board(board):
     print(np.flip(board, 0))
 
 
-
+'''cheecks for a 4 count in four directions:- horizontal, vertical, positive diaganal, negative diaganal'''
 # this is for all winning directions
 # shows who's the winner
 def winning_move(board, piece):
@@ -89,7 +89,7 @@ def winning_move(board, piece):
                 return True
 
 
-
+'''draws graphics with pygame package'''
 # draw board with pygame graphics
 def draw_board(board):
     for c in range(COLUMN_COUNT):
@@ -100,24 +100,28 @@ def draw_board(board):
             pygame.draw.circle(screen, BLACK, (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE+SQUARESIZE/2)), RADIUS)
 
 
-
+'''generates board'''
 # creates board
 board = create_board()
 
+'''prints board to screen'''
 # prints board
 print_boaard(board)
 
+'''defines if the game is still active or has reached a result'''
 # defines if the game is over on in play
 game_over = False
 
+'''defines how many turns are available'''
 #defines turn amount
 turn = 0
 
 
-
+'''initiates pygame package'''
 # initialize pygame
 pygame.init()
 
+'''defines the size and shape of board'''
 SQUARESIZE = 100
 
 width = COLUMN_COUNT * SQUARESIZE
@@ -127,12 +131,15 @@ size = (width, height)
 
 RADIUS = int(SQUARESIZE/2 - 5)
 
+'''defines grahical display of pygame package'''
 screen = pygame.display.set_mode(size)
 draw_board(board)
+
+'''updates display'''
 pygame.display.update()
 
 
-
+'''defines what happens, (whilst game is in loop) if the game has not reached a result'''
 # defines what happens if the game is not over 
 while not game_over:
 
