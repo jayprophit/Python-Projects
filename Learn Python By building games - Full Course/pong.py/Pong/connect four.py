@@ -78,5 +78,5 @@ while not game_over:
 
     # increase turn by 1
     turn += 1
-    # turns its to odd even, meaning take what ever our turn is and divide it by 2 (alternating between player 1 and 2)
+    # turns its to odd even, meaning take what ever our turn is and divides it by 2 (alternating between player 1 and 2)
     turn = turn % 2
