@@ -14,6 +14,6 @@
 
 [pygame documentation](pygame.org/docs/)
 
-- Tetris
+- Tetris - Tech with Tim
 
 - Online multiplayer Game
