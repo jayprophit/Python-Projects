@@ -24,7 +24,7 @@ COLUMN_COUNT =7
 
 # defines the board specifications
 def create_board(
-    board = np.zeros((ROW_COUNT,COLUMN_COUNT)))
+    board = np.zeros((ROW_COUNT,COLUMN_COUNT))):
     return board
 
 
@@ -54,6 +54,7 @@ def get_next_open_row(board, col):
 # change the orientation of the board, flips board to right side up
 def print_board(board):
     print(np.flip(board, 0))
+
 
 
 # this is for all winning directions
@@ -110,9 +111,8 @@ while not game_over:
             row = get_next_open_row(board, col)
             drop_piece(board, row, col, 1)
 
-
             # checks for winning move
-            if winning_move(board, 1)
+            if winning_move(board, 1):
                 print("Player 1 Wins!!! Congrats!!!")
                 game_over = True
 
@@ -126,10 +126,12 @@ while not game_over:
             drop_piece(board, row, col, 2)
 
             # checks for winning move
-            if winning_move(board, 2)
+            if winning_move(board, 2):
                 print("Player 2 Wins!!! Congrats!!!")
                 game_over = True
                 '''break'''
+
+
 
     # prints board
     print_board(board)
