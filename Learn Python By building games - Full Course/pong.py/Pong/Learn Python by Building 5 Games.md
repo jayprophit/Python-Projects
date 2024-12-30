@@ -4,8 +4,8 @@
 
 [youtube video](https://youtu.be/XGf2GcyHPhc?si=DwGBDk-fAVaIk2nB)
 
-- Pong - christian thompson
-- Snake - tech with tim
-- Connect Four
+- Pong - Christian Thompson
+- Snake - Tech with Tim
+- Connect Four - Keith Galli
 - Tetris
 - Online multiplayer Game
