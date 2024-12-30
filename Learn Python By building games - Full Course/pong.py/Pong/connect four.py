@@ -100,8 +100,10 @@ def draw_board(board):
             pygame.draw.circle(screen, BLACK, (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE+SQUARESIZE/2)), RADIUS)
 
 
+
 # creates board
 board = create_board()
+
 # prints board
 print_boaard(board)
 
@@ -128,6 +130,7 @@ RADIUS = int(SQUARESIZE/2 - 5)
 screen = pygame.display.set_mode(size)
 draw_board(board)
 pygame.display.update()
+
 
 
 # defines what happens if the game is not over 
