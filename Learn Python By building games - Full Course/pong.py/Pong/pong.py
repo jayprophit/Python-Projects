@@ -2,8 +2,13 @@
 # part 1 : Getting started
 
 '''
-Pong
+game name: Pong
+
+index:-
+win= window
 '''
+
+
 # import tutrle function
 import turtle
 import os

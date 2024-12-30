@@ -1,8 +1,11 @@
-# snake
 # by @jayprophit
+# part 2
 
 '''
 snake in pygame
+
+index:-
+w = width
 '''
 
 import math
