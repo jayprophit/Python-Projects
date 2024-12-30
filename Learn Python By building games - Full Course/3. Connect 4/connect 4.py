@@ -190,20 +190,21 @@ while not game_over:
 
         # this allows the use of a mouse to be detected
         if event.type == pygame.MOUSEBUTTONDOWN:
-            pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
-
-            # print(event.pos)
-
             
-            # ask for player 1 input
-            if turn == 0:
-                posx = event.pos[0]
-                col = int(math.floor(posx/SQUARESIZE))
-                '''int(input("Player 1 make your Selection (0-6):"))'''
+            posx = event.pos[0]
+            col = int(math.floor(posx/SQUARESIZE))
+            '''int(input("Player 1 make your Selection (0-6):"))'''
 
 
-                # checks if its a valid location on the board
-                if is_valid_location(board, col):
+            # checks if its a valid location on the board
+            if is_valid_location(board, col):
+
+                pygame.draw.rect(screen, BLACK, (0,0, width, SQUARESIZE))
+
+                # print(event.pos)
+                # ask for player 1 input
+
+                if turn == 0:
                     row = get_next_open_row(board, col)
                     drop_piece(board, row, col, 1)
 
