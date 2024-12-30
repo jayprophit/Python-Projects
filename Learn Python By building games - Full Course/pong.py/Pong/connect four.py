@@ -9,26 +9,38 @@ np = numpy
 col = column
 '''
 
-# global
-ROW_COUNT = 6
-COLUMN_COUNT =7
+
 
 # imports numpy package, set numpy to be defined as np
 import numpy as np
 
+
+
+# global
+ROW_COUNT = 6
+COLUMN_COUNT =7
+
+
+
 # defines the board specifications
 def create_board(
-    board = np.zeros((6,7)))
+    board = np.zeros((ROW_COUNT,COLUMN_COUNT)))
     return board
+
+
 
 # drops the player 1 or player 2 piece in the correct row and column
 def drop_piece(board, row, col, piece):
     boared[row][col] = piece
 
+
+
 # defines if its the valid location
 def is_valid_location(board, col):
     # check to see if the 5th col is available without an input
-    return board[5][col] == 0
+    return board[ROW_COUNT-1][col] == 0
+
+
 
 # gets the next open row
 def get_next_open_row(board, col):
@@ -37,9 +49,41 @@ def get_next_open_row(board, col):
         if board[r][col] == 0:
             return r
 
+
+
 # change the orientation of the board, flips board to right side up
 def print_board(board):
     print(np.flip(board, 0))
+
+
+# this is for all winning directions
+# shows who's the winner
+def winning_move(board, piece):
+    # check horizontal locations for win
+    for c in range(COLUMN_COUNT-3):
+        for r in range(ROW_COUNT):
+            if board[r][c] == piece and board[r][c+1] == piece and board[r][c+2] == piece and board[r][c+3] == piece:
+                return True
+
+    # check virtical locations for win
+    for c in range(COLUMN_COUNT):
+        for r in range(ROW_COUNT-3):
+            if board[r][c] == piece and board[r+1][c] == piece and board[r+2][c] == piece and board[r+3][c] == piece:
+                return True
+
+    # check positively sloped diaganol locations for win
+    for c in range(COLUMN_COUNT-3):
+        for r in range(ROW_COUNT-3):
+            if board[r][c] == piece and board[r+1][c+1] == piece and board[r+2][c+2] == piece and board[r+3][c+3] == piece:
+                return True
+
+    # check neatively sloped diaganol locations for win
+    for c in range(COLUMN_COUNT-3):
+        for r in range(3, ROW_COUNT):
+            if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c-2] == piece and board[r-3][c+3] == piece:
+                return True
+
+
 
 # creates board
 board = create_board()
@@ -51,6 +95,8 @@ game_over = False
 
 #defines turn amount
 turn = 0
+
+
 
 # defines what happens if the game is not over 
 while not game_over:
@@ -64,6 +110,12 @@ while not game_over:
             row = get_next_open_row(board, col)
             drop_piece(board, row, col, 1)
 
+
+            # checks for winning move
+            if winning_move(board, 1)
+                print("Player 1 Wins!!! Congrats!!!")
+                game_over = True
+
     # askfor player 2 input
     else:
         col = int(input("Player 2 make your Selection (0-6):"))
@@ -72,6 +124,12 @@ while not game_over:
         if is_valid_location(board, col):
             row = get_next_open_row(board, col)
             drop_piece(board, row, col, 2)
+
+            # checks for winning move
+            if winning_move(board, 2)
+                print("Player 2 Wins!!! Congrats!!!")
+                game_over = True
+                '''break'''
 
     # prints board
     print_board(board)
