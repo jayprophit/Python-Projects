@@ -2,7 +2,7 @@
 # part 3
 
 '''
-game name: connect four
+game name: connect 4
 
 index:-
 np = numpy
