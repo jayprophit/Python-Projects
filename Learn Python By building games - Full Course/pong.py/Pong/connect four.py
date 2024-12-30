@@ -1,7 +1,7 @@
 '''
 connect four
 '''
-# imports numpy function, set numpy to be defined as np
+# imports numpy package, set numpy to be defined as np
 import numpy as np
 
 # defines the board specifications
