@@ -7,6 +7,7 @@ game name: Connect 4
 index:-
 np = numpy
 col = column
+opp_piece = opponaunt_piece
 '''
 
 
@@ -34,6 +35,7 @@ COLUMN_COUNT =7
 PLAYER = 0
 AI = 1
 
+EMPTY = 0
 PLAYER_PIECE = 1
 AI_PIECE = 2
 
@@ -109,14 +111,105 @@ def winning_move(board, piece):
 
 
 
+'''evaluate window'''
+# evaluates window
+def evaluate_window(window, piece):
+    score = 0
+    # sets the palyer to the opponaunts piece and vice versa
+    opp_piece = PLAYER_PIECE
+    if piece = PLAYER_PIECE:
+        opp_piece = AI
+
+    # counts used turns and pieces together to calculate score
+    if window.COUNT(piece) == 4:
+        score == 100
+    elif window.COUNT(piece) == 3 and window.COUNT(EMPTY) == 1:
+        score =+ 10
+    elif window.COUNT(piece) == 2 and window.COUNT(EMPTY) == 2:
+        score =+ 5
+
+    if window.COUNT(opp_piece) == 3 and window.COUNT(EMPTY) = 1:
+    score -= 80
+
+return score
+
+
+
 '''defines a score'''
 # defines the score position
 def score_position(board, piece):
+    
+    score = 0
+
+    ## score center column
+    
+
+
     ## Score horizontal
     for r in range(ROW_COUNT):
         row_array = [int(i) for i in list(board[r,:])]
         for c in range(COLUMN_COUNT-3):
             window = row_array[c:c+WINDOW_LENGTH]
+            score += evaluate_window(window, piece)
+
+    ## Score vertical
+    for c in range(COLUMN_COUNT):
+        column_array = [int(i) for i in list(board[:,c])]
+        for r in range(ROW_COUNT-3):
+            window = column_array[r:r+WINDOW_LENGTH]
+            score += evaluate_window(window, piece)
+
+    ## Score positive sloped diaganal
+    for r in range(ROW_COUNT-3):
+        for c in range(COLUMN_COUNT-3):
+            window = [board[r+i][c+i] for i in range(WINDOW_LENGTH)]
+            score += evaluate_window(window, piece)
+
+    ## Score negative sloped diaganal
+    for r in range(ROW_COUNT-3):
+        for c in range(COLUMN_COUNT-3):
+            window = [board[r+3-i][c+i] for i in range(WINDOW_LENGTH)]
+            score += evaluate_window(window, piece)
+
+            '''
+            if window.COUNT(piece) == 4:
+                score += 100
+
+            elif window.COUNT(piece) == 3 and Window.COUNT(EMPTY) == 1:
+                score += 10
+            '''
+
+    return score
+
+
+
+'''defines valid locations'''
+def get_valid_locations(board):
+    valid_locations = []
+    for col in range(COLUMN_COUNT):
+        if is_valid_location(board, col)
+        valid_locations.append(col)
+    return valid_locations
+
+
+
+'''define pick best move'''
+def pick_best_move(board, piece):
+    valid_locations = get_valid_locations(board)
+    best_score = -10000
+    best_col = random.choice(valid_locations)
+    for col in valid_locations:
+        row = get_next_open_row(board, col)
+        # makes a temporary board, so it dosent conflict with original board
+        temp_board = board.copy()
+        # drops temp board and piece together to calculate new outcome
+        drop_piece(temp_board, row, col, piece)
+        scroe = score_position(temp_board, piece)
+        if score is > best_score:
+            best_score = score
+            best_col = col
+
+    return best_col
 
 
 
@@ -249,7 +342,8 @@ while not game_over:
     if turn == AI and not game_over:
         
         # selects a random data input
-        col = random.randint(0, COLUMN_COUNT-1)
+        # col = random.randint(0, COLUMN_COUNT-1)
+        col = pick_best_move(board, AI_PIECE)
 
 
         # checks if its a valid location on the board
