@@ -14,9 +14,13 @@ col = column
 # imports numpy package, set numpy to be defined as np
 import numpy as np
 import pygame
+import sys
 
 
 # global
+BLUE = (0,0,255)
+BLACK = (0,0,0)
+
 ROW_COUNT = 6
 COLUMN_COUNT =7
 
@@ -86,6 +90,16 @@ def winning_move(board, piece):
 
 
 
+# draw board with pygame graphics
+def draw_board(board):
+    for c in range(COLUMN_COUNT):
+        for r in range(ROW_COUNT):
+            # draws a blue screen
+            pygame.draw.rect(screen, BLUE, (c*SQUARESIZE, r*SQUARESIZE+SQUARESIZE, SQUARESIZE, SQUARESIZE))
+            # draws black circles
+            pygame.draw.circle(screen, BLACK, (int(c*SQUARESIZE+SQUARESIZE/2), int(r*SQUARESIZE+SQUARESIZE+SQUARESIZE/2)), RADIUS)
+
+
 # creates board
 board = create_board()
 # prints board
@@ -109,48 +123,62 @@ height = (ROW_COUNT+1) * SQUARESIZE
 
 size = (width, height)
 
-screen = pygame.display.set_mode(size)
+RADIUS = int(SQUARESIZE/2 - 5)
 
+screen = pygame.display.set_mode(size)
+draw_board(board)
+pygame.display.update()
 
 
 # defines what happens if the game is not over 
 while not game_over:
-    # ask for player 1 input
-    if turn == 0:
-        # col = colunm
-        col = int(input("Player 1 make your Selection (0-6):"))
 
-        # checks if its a valid location on the board
-        if is_valid_location(board, col):
-            row = get_next_open_row(board, col)
-            drop_piece(board, row, col, 1)
+    # this allows the screen event to continue and not close
+    for event in pygame.event.get():
+        if event type == pygame.QUIT:
+            sys.exit()
 
-            # checks for winning move
-            if winning_move(board, 1):
-                print("Player 1 Wins!!! Congrats!!!")
-                game_over = True
-
-    # askfor player 2 input
-    else:
-        col = int(input("Player 2 make your Selection (0-6):"))
-
-        # checks if its a valid location on the board
-        if is_valid_location(board, col):
-            row = get_next_open_row(board, col)
-            drop_piece(board, row, col, 2)
-
-            # checks for winning move
-            if winning_move(board, 2):
-                print("Player 2 Wins!!! Congrats!!!")
-                game_over = True
-                '''break'''
+        # this allows the use of a mouse to be detected
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            continue
 
 
+            # ask for player 1 input
+            if turn == 0:
+                # col = colunm
+                col = int(input("Player 1 make your Selection (0-6):"))
 
-    # prints board
-    print_board(board)
+                # checks if its a valid location on the board
+                if is_valid_location(board, col):
+                    row = get_next_open_row(board, col)
+                    drop_piece(board, row, col, 1)
 
-    # increase turn by 1
-    turn += 1
-    # turns its to odd even, meaning take what ever our turn is and divides it by 2 (alternating between player 1 and 2)
-    turn = turn % 2
+                    # checks for winning move
+                    if winning_move(board, 1):
+                        print("Player 1 Wins!!! Congrats!!!")
+                        game_over = True
+
+            # askfor player 2 input
+            else:
+                col = int(input("Player 2 make your Selection (0-6):"))
+
+                # checks if its a valid location on the board
+                if is_valid_location(board, col):
+                    row = get_next_open_row(board, col)
+                    drop_piece(board, row, col, 2)
+
+                    # checks for winning move
+                    if winning_move(board, 2):
+                        print("Player 2 Wins!!! Congrats!!!")
+                        game_over = True
+                        '''break'''
+
+
+
+            # prints board
+            print_board(board)
+
+            # increase turn by 1
+            turn += 1
+            # turns its to odd even, meaning take what ever our turn is and divides it by 2 (alternating between player 1 and 2)
+            turn = turn % 2
