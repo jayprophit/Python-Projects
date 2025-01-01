@@ -113,28 +113,28 @@ def paddle_a_up():
     y = paddle_a.ycor()
     y += 20
     # sets y to new y
-    padddle_a.sety(y)
+    paddle_a.sety(y)
 
 # paddle A down
 def paddle_a_down():
     y = paddle_a.ycor()
     y -= 20
     # sets y to new y
-    padddle_a.sety(y)
+    paddle_a.sety(y)
 
 # paddle B up
 def paddle_b_up():
     y = paddle_b.ycor()
     y += 20
     # sets y to new y
-    padddle_b.sety(y)
+    paddle_b.sety(y)
 
 # paddle B down
 def paddle_b_down():
     y = paddle_b.ycor()
     y -= 20
     # sets y to new y
-    padddle_b.sety(y)
+    paddle_b.sety(y)
 
 
 
