@@ -31,7 +31,7 @@ top_left_y = s_height - play_height
 
 
 
-'''tetris shapes'''
+'''tetris object shapes'''
 # SHAPE FORMATS
 
 S = [[
