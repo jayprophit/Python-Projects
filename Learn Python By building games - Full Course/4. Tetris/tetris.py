@@ -164,13 +164,25 @@ shape_colors = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,
 
 '''class objects - main data structure for the game'''
 class Piece(object):
-    pass
+    def __init__(self, x, y, shape):
+        self.x = X
+        self.y = y
+        self.shape = shape
+        self.color = shape_color[shape.index(shape)]
+        self.rotation = 0
 
 
 
 '''creates grid'''
-def create_grid(locked_positions={}):
-    pass
+def create_grid(locked_positions={}):   # *
+    grid =[[(0,0,0) for _ in range(10)] for _ in range(20)]
+
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if (j, i) in locked_pos:
+                c = locked_pos[j,i]
+                grid[i][j] = c
+    return grid
 
 
 
@@ -193,8 +205,8 @@ def check_lost(positions):
 
 
 '''gets shape'''
-def get_shape():
-    pass
+def get_shape():    # *
+    return random.choice(shapes)
 
 
 
@@ -205,8 +217,14 @@ def draw_text_middle(text, size, color, surface):
 
 
 '''draws grid'''
-def draw_grid(surface, row, col):
-    pass
+def draw_grid(surface, row, col):   # *
+    surface.fill((0,0,0))
+
+    pygame.font.init()
+    font = pygame.font.SysFont('comicsans', 60)
+    label = font.render('Tetris', 1, (255,255,255))
+
+    surface.blit(label, (top_left_x + play_width/2 - (label.get_width()/2), 30))
 
 
 
@@ -221,7 +239,7 @@ def draw_next_shape(shape, surface):
 
 
 '''draws window'''
-def draw_window(surface):
+def draw_window(surface):   # *
     pass
 
 
