@@ -6,9 +6,9 @@ numpy
 streamlit - app
 pygames
 pylance
-turtle
+turtle - game environment
 os - operating systems - apple
-sys
+sys - system - python
 math 
 random
 tkinter

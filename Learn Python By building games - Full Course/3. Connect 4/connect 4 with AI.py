@@ -142,7 +142,9 @@ def score_position(board, piece):
     score = 0
 
     ## score center column
-    
+    center_array = [int(i) for i in list(board[:, COLUMN_COUNT//2])]
+    center_count = center_array.count(piece)
+    score += center_count * 6
 
 
     ## Score horizontal
@@ -181,7 +183,14 @@ def score_position(board, piece):
 
     return score
 
+'''terminal node'''
+def is_terminal_node(board):
+    return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
 
+''' minimax - looks down the best branch for the score function, to return score position function'''
+def minimax(board, depth, maximizingPlayer):
+    if depth == 0 or terminal_node
+        pass
 
 '''defines valid locations'''
 def get_valid_locations(board):
