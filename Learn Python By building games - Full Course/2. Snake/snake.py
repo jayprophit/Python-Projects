@@ -48,8 +48,8 @@ class cube(object):
         if eyes:
             centre = dis//2
             radius = 3
-            circleMiddle = (i*dis+cenre-radius, j*dis+8)
-            circleMiddle2 - (i*dis+dis-radius*2, j*dis+8)
+            circleMiddle = (i*dis+centre-radius, j*dis+8)
+            circleMiddle2 = (i*dis+dis-radius*2, j*dis+8)
             pygame.draw.circle(surface, (0, 0, 0), circleMiddle, radius)
             pygame.draw.circle(surface, (0, 0, 0), circleMiddle2, radius)
 
@@ -97,10 +97,10 @@ class snake(object):
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
 
         # this looks(tracks), moves the positions of the snake
-        for i, c in emerate(self.body):
+        for i, c in enumerate(self.body):
             p = c.pos[:]
             if p in self.turns:
-                turn = self.turn[p]
+                turn = self.turns[p]
                 c.move(turn[0], turn[1])
                 if i == len(self.body)-1:
                     self.turns.pop(p)
@@ -179,7 +179,7 @@ def randomSnack(rows, items):
     while True:
         x = random.randrange(rows)
         y = random.randrange(rows)
-        if len(list(filter(lamda z:z.pos == (x,y), positions))) > 0:
+        if len(list(filter(lambda z:z.pos == (x,y), positions))) > 0:
             continue
         else:
             break
@@ -201,7 +201,7 @@ def message_box(subject, content):
 
 # main settings and global control
 def main():
-    global width, rows, s, sanck
+    global width, rows, s, snack
     height = 500
     rows = 20
     win = pygame.display.set_mode((width, width))
@@ -222,7 +222,7 @@ def main():
             snack = cube(randomSnack(rows, s), color=(0, 255, 0))
 
         for x in range(len(s.body)):
-            if s.body[x].pos in list(map(lamda Z:z.pos, s.body[x+1:])):
+            if s.body[x].pos in list(map(lambda Z:z.pos, s.body[x+1:])):
                 print('Score: ', len(s.body))
                 message_box('You Lost', 'Play again...')
                 s.reset((10,10))
@@ -230,4 +230,5 @@ def main():
 
         redrawWindow(win)
 
-    pass
+# run main game
+main()
