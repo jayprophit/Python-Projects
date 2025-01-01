@@ -12,6 +12,8 @@ index:-
 import pygame
 import random
 
+
+
 # creating the data structure for pieces
 # setting up global vars
 # functions
@@ -21,13 +23,19 @@ import random
 # - rotating shape in main
 # - setting up the main
 
+
+
 """
 10 x 20 square grid
 shapes: S, Z, I, O, J, L, T
 represented in order by 0 - 6
 """
 
+
+
 pygame.font.init()
+
+
 
 # GLOBALS VARS
 s_width = 800
@@ -40,12 +48,14 @@ top_left_x = (s_width - play_width) // 2
 top_left_y = s_height - play_height
 
 
+
+'''defines shapes'''
 # SHAPE FORMATS
 
 S = [[\'.....\',
-    \'......\',
-    \'..00..\',
-    \'.00...\',
+    \'.....\',
+    \'..00.\',
+    \'.00..\',
     \'.....\'],
     \'.....\',
     \'..0..\',
@@ -144,49 +154,88 @@ T = [[\'.....\',
     \'..0..\',
     \'.....\']]
 
+
+'''sets shape colors'''
 shapes = [S, Z, I, O, J, L, T]
 shape_colors = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,0,255), (128,0,128)]
 # index 0 - 6 represent shape
 
 
+
+'''class objects'''
 class Piece(object):
     pass
 
+
+
+'''creates grid'''
 def create_grid(locked_positions={}):
     pass
 
-defconvert_shape_format(shape):
+
+
+'''converts shape'''
+def convert_shape_format(shape):
     pass
 
+
+
+'''validates space'''
 def valid_space(shape, grid):
     pass
 
+
+
+'''checks for lost'''
 def check_lost(positions):
     pass
 
+
+
+'''gets shape'''
 def get_shape():
     pass
 
 
+
+'''draws text'''
 def draw_text_middle(text, size, color, surface):
     pass
 
+
+
+'''draws grid'''
 def draw_grid(surface, row, col):
     pass
 
+
+
+'''clears rows'''
 def clear_rows(grid, locked):
 
 
+
+'''draws next shape'''
 def draw_next_shape(shape, surface):
 
 
+
+'''draws window'''
 def draw_window(surface):
     pass
 
+
+
+'''defines main'''
 def main():
     pass
 
+
+
+'''defines main menu'''
 def main_menu():
     pass
+
+
 
 main_menu() # start game
