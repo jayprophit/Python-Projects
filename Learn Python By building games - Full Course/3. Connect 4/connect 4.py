@@ -129,7 +129,7 @@ board = create_board()
 
 '''prints board to screen'''
 # prints board
-print_boaard(board)
+print_board(board)
 
 '''defines if the game is still active or has reached a result'''
 # defines if the game is over on in play
@@ -173,7 +173,7 @@ while not game_over:
 
     # this allows the screen event to continue and not close
     for event in pygame.event.get():
-        if event type == pygame.QUIT:
+        if event.type == pygame.QUIT:
             sys.exit()
 
 
