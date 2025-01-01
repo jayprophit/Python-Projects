@@ -22,7 +22,7 @@ import winsound
 # window screen
 win = turtle.Screen()
 # window title
-win.tittle(" Pong by @JayProphit")
+win.title(" Pong by @JayProphit")
 # background color
 win.bgcolor("black")
 # widows dimensions, width and height in pixels
@@ -47,7 +47,7 @@ paddle_a.shape("square")
 # specifies the color
 paddle_a.color("white")
 # default shape size is 20 pixels wide by 20 pixels high, 1 pixel = 20, 5 = 100 which is 5*20
-paddle_a.shapesize(stretch_wid=5, strectch_len=1)
+paddle_a.shapesize(stretch_wid=5, stretch_len=1)
 # turns of the ability to draw a line, as the turtle program by default draws a line as its moving
 paddle_a.penup()
 # sets tthe location
