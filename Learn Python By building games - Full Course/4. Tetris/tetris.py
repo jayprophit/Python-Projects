@@ -162,7 +162,7 @@ shape_colors = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,
 
 
 
-'''class objects'''
+'''class objects - main data structure for the game'''
 class Piece(object):
     pass
 
