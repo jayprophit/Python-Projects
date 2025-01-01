@@ -29,6 +29,9 @@ block_size = 30
 top_left_x = (s_width - play_width) // 2
 top_left_y = s_height - play_height 
 
+
+
+'''tetris shapes'''
 # SHAPE FORMATS
 
 S = [[
@@ -141,5 +144,76 @@ T = [[
     '..0..',
     '.....',]]
 
+'''tetris shape colors'''
 shapes = [S, Z, I, O, J, L, T]
-SHAPE_COLORS = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,0,255), 128,0,128]
+SHAPE_COLORS = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,0,255), (128,0,128)]
+# index 0-6 represent shape
+
+
+'''piece'''
+class piece(object):    # *
+    pass
+
+
+
+'''creates grid'''
+def create_grid(locked_pos = {}):   # *
+    pass
+
+
+
+'''coverts shapes'''
+def convert_shape_format():
+    pass
+
+
+
+'''defines valid space'''
+def valid_space():
+    pass
+
+
+
+'''checks lost'''
+def check_lost():
+    pass
+
+
+
+'''get shape'''
+def get_shape():    # *
+    pass
+
+
+
+'''draw text middle'''
+def draw_text_middle():
+    pass
+
+
+
+'''draws grid'''
+def draw_grid():    # *
+    pass
+
+
+
+'''clears row'''
+def clear_rows():
+    pass
+
+
+
+'''draws next shape'''
+def draw_next_shape():
+    pass
+
+
+
+'''draws window'''
+def draw_window():  # *
+    pass
+
+
+'''runs main game'''
+def main(): # *
