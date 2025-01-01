@@ -55,7 +55,7 @@ def create_board(
 ''' drops players piece'''
 # drops the player 1 or player 2 piece in the correct row and column
 def drop_piece(board, row, col, piece):
-    boared[row][col] = piece
+    board[row][col] = piece
 
 
 
@@ -303,7 +303,7 @@ board = create_board()
 
 '''prints board to screen'''
 # prints board
-print_boaard(board)
+print_board(board)
 
 
 
@@ -356,7 +356,7 @@ while not game_over:
 
     # this allows the screen event to continue and not close
     for event in pygame.event.get():
-        if event type == pygame.QUIT:
+        if event.type == pygame.QUIT:
             sys.exit()
 
         # this detects when the mouse button is pressed
