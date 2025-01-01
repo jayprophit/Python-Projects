@@ -7,7 +7,7 @@ streamlit - app
 pygames
 pylance
 turtle
-os - apple operating systems
+os - operating systems - apple
 sys
 math 
 random
