@@ -158,7 +158,7 @@ T = [[\'.....\',
 '''sets shape colors'''
 shapes = [S, Z, I, O, J, L, T]
 shape_colors = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,0,255), (128,0,128)]
-# index 0 - 6 represent shape
+# index 0-6 represent shape
 
 
 
