@@ -42,7 +42,7 @@ def create_board(
 ''' drops players piece'''
 # drops the player 1 or player 2 piece in the correct row and column
 def drop_piece(board, row, col, piece):
-    boared[row][col] = piece
+    board[row][col] = piece
 
 
 
