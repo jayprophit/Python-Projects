@@ -243,7 +243,10 @@ def get_shape():    # *
 
 '''draws text'''
 def draw_text_middle(text, size, color, surface):
-    pass
+    font = pygame.font.SysFont("comicsans", size, bold=True)
+    label = font.render(text, 1, color)
+
+    surface.blit(label, (top_left_x + play_width/2 - (label.get_width()/2), top_left_y + play_height/2 - label.get_height() / 2))
 
 
 
@@ -281,6 +284,8 @@ def clear_rows(grid, locked):
                 newKey = (x, y + inc)
                 locked[newKey] = locked.pop(key)
 
+    return inc
+
 
 
 '''draws next shape'''
@@ -301,8 +306,9 @@ def draw_next_shape(shape, surface):
     surface.blit(label, (sx + 10, sy - 30))
 
 
+
 '''draws window'''
-def draw_window(surface, grid):   # *
+def draw_window(surface, grid, score=0):   # *
     surface.fill((0,0,0))
 
     pygame.font.init()
@@ -311,6 +317,14 @@ def draw_window(surface, grid):   # *
 
     surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
 
+    font = pygame.font.SysFont('comicsans', 30)
+    label = font.render('Score: ' + str(score), 1, (255,255,255))
+
+    sx = top_left_x + play_width + 50
+    sy = top_left_y + play_height / 2 - 100
+
+    surface.blit(label, (sx + 20, sy + 160))
+
     for i in range(len(grid)):
         for j in range(len(grid[i])):
             pygame.draw.rect(surface, grid[i][j], (top_left_x + j*block_size, top_left_y + i*block_size, block_size, block_size), 0)
@@ -318,7 +332,6 @@ def draw_window(surface, grid):   # *
     pygame.draw.rect(surface, (255,0,0), (top_left_x, top_left_y, play_width, play_height), 4)
 
     draw_grid(surface, grid)
-
 
 
 
@@ -336,6 +349,7 @@ def main(win):
     fall_time = 0
     fall_speed = 0.27
     level_time = 0
+    score = 0
 
     while run:
         grid = create_grid(lock_positions)
@@ -346,6 +360,8 @@ def main(win):
 
         if level_time/1000 > 5:
             level_time = 0
+            if  level_time > 0.12:
+                level_time -= 0.005
 
         if fall_time/1000 > fall_speed:
             fall_time = 0
@@ -394,21 +410,34 @@ def main(win):
             next_piece = get_shape()
             change_piece = False
             clear_rows(grid, locked_positions)
+            score += clear_rows(grid, locked_positions) * 10
         
-        draw_window(win, grid)
+        draw_window(win, grid, score)
         draw_next_shape(next_piece, win)
         pygame.display.update()
 
-
         if check_lost(locked_positions):
+            draw_text_middle(win, "YOU LOST!", 80, (255,255,255))
+            pygame.display.update()
+            pygame.time.delay(1500)
             run = False
-    pygame.display.quit()
 
 
 
 '''defines main menu'''
 def main_menu(win):
-    main(win)
+    run = True
+    while run:
+        win.fill((0,0,0))
+        draw_text_middle('Press Any Key To Play', 60, (255,255,255))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type == pygame.KEYDOWN:
+                main()
+
+    pygame.display.quit()
 
 
 
