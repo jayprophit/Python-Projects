@@ -373,6 +373,7 @@ def main(win):
         for event in pygame.evengt.get():
             if event.type == pygame.QUIT:
                 run = False
+                pygame.display.quit()
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
