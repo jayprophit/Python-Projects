@@ -429,13 +429,13 @@ def main_menu(win):
     run = True
     while run:
         win.fill((0,0,0))
-        draw_text_middle('Press Any Key To Play', 60, (255,255,255))
+        draw_text_middle(win, 'Press Any Key To Play', 60, (255,255,255))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.KEYDOWN:
-                main()
+                main(win)
 
     pygame.display.quit()
 
