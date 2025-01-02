@@ -308,6 +308,13 @@ def main(win):
         fall_time += clock.get_rawtime()
         clock.tick()
 
+        if fall_time/1000 > fall_speed:
+            fall_time = 0
+            current_piece.y += 1
+            if not(valid_space(current_piece, grid)) and current_piece.y > 0:
+                current_piece.y -= 1
+                change_piece = True
+
         for event in pygame.evengt.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -317,7 +324,6 @@ def main(win):
                 current_piece.x -= 1
                 if not(valid_space(current_piece, grid)):
                     current_piece += 1
-
 
             if event.key == pygame.K_RIGHT:
                 current_piece.x += 1
