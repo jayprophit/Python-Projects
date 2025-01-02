@@ -15,5 +15,4 @@ winsound - windows sound
 
 A.I:-
 random
-minimax
-alpha-beata pruning
+minimax & alpha-beata pruning
