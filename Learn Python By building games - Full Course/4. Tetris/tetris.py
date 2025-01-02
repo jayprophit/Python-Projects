@@ -205,13 +205,28 @@ def convert_shape_format(shape):
 
 '''validates space'''
 def valid_space(shape, grid):
-    pass
+    acceppted_pos = [[(j, i) for j in range(10) if grid[i][j] == (0,0,0)] for i in range(20)]
+    '''one dimentional list - flattening the list'''
+    acceppted_pos = [j for sub in acceppted_pos for j in sub]
+
+    formatted = convert_shape_format(shape)
+
+    for pos in formatted:
+        if pos not in acceppted_pos:
+            pos[1] > -1
+            return False
+    return True
 
 
 
 '''checks for lost'''
 def check_lost(positions):
-    pass
+    for pos in positions:
+        x, y = pos
+        if y < 1:
+            return True
+
+    return False
 
 
 
@@ -233,9 +248,9 @@ def draw_grid(surface, grid):   # *
     sx = top_left_y
 
     for i in range(len(grid)):
-        pygame.draw.line(surface, (128,128,128), (sx, sy + i*block_size), ((sx + play_width, sx, sy + i*block_size)
+        pygame.draw.line(surface, (128,128,128), (sx, sy + i*block_size), (sx + play_width, sx, sy + i*block_size))
         for j in range(len(grid[i])):
-            pygame.draw.line(surface, (128,128,128), (sx + j*block_size, sy), (sx + j*block_size, sy  + play_height)
+            pygame.draw.line(surface, (128,128,128), (sx + j*block_size, sy), (sx + j*block_size, sy  + play_height))
 
 
 
@@ -285,11 +300,17 @@ def main(win):
     next_piece = get_shape()
     clock = pygame.time.Clock()
     fall_time = 0
+    fall_speed = 0.27
 
     while run:
-        for event in pygame.evengt.get()
-        if event.type == pygame.QUIT:
-            run = False
+        grid = create_grid(lock_positions)
+        '''rawtime gets the amount of time since the last clock.tick'''
+        fall_time += clock.get_rawtime()
+        clock.tick()
+
+        for event in pygame.evengt.get():
+            if event.type == pygame.QUIT:
+                run = False
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
