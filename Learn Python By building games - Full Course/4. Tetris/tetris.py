@@ -10,6 +10,9 @@ sx = start x
 inc = increment
 ind = indent
 del = delete
+r = read - read mode
+w = write - write mode
+nscore = new score
 '''
 
 
@@ -307,6 +310,23 @@ def draw_next_shape(shape, surface):
 
 
 
+'''saves score to text file'''
+def update_score(nscore):
+    with open('scores.txt', 'r') as f:
+        lines = f.readlines()
+        score = lines[0].strip()
+
+    with open('scores.txt', 'w') as f:
+        if int(score) = nscore:
+            f.write(str(score))
+        else:
+            f.write(str(nscore))
+
+
+
+
+
+
 '''draws window'''
 def draw_window(surface, grid, score=0):   # *
     surface.fill((0,0,0))
@@ -422,6 +442,7 @@ def main(win):
             pygame.display.update()
             pygame.time.delay(1500)
             run = False
+            update_score(score)
 
 
 
