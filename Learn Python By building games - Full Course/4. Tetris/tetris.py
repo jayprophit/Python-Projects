@@ -172,7 +172,7 @@ shape_colors = [(0,255,0), (255,0,0), (0,255,255), (255,255,0), (255,165,0), (0,
 '''class objects - main data structure for the game'''
 class Piece(object):
     def __init__(self, x, y, shape):
-        self.x = X
+        self.x = x
         self.y = y
         self.shape = shape
         self.color = shape_color[shape.index(shape)]
